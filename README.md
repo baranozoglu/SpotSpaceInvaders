@@ -1,4 +1,4 @@
-# Fuga dev assignment
+# Dev assignment
 
 Oh no, it's the SPACE INVADERS! But this time, you only see them on a very noisy radar image. Your mission is to write a
 program that detects space invaders in this image.
@@ -127,4 +127,4 @@ o--oo------o-----oo--o-oo------------oo--o------o--o-------------oo----o--------
 2. Factory Design Pattern
 
 **UML DIAGRAM**
-![ss](./resource/uml.png)
+![ss](./src/main/resource/uml.png)
