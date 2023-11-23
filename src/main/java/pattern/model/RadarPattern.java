@@ -1,16 +1,17 @@
 package pattern.model;
 
-import lombok.NoArgsConstructor;
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@NoArgsConstructor
 public class RadarPattern extends Pattern {
     private Map<Long, Long> spaceInvadersIdCountMap;
     private Long spaceInvaderCount;
     private boolean isSafe;
+
+    public RadarPattern() {
+        super();
+    }
 
     public RadarPattern(Long id, List<String> lines) {
         super(id, lines);

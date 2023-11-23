@@ -9,7 +9,7 @@ import java.util.List;
 
 public class DetectorService {
 
-    private PatternDetectorStrategy patternDetectorStrategy;
+    private final PatternDetectorStrategy patternDetectorStrategy;
 
     public DetectorService(PatternDetectorStrategy patternDetectorStrategy) {
         this.patternDetectorStrategy = patternDetectorStrategy;

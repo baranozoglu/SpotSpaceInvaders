@@ -2,52 +2,40 @@ package reader;
 
 import pattern.PatternEnum;
 import pattern.PatternFactory;
-import pattern.model.RadarPattern;
-import pattern.model.SpaceInvaderPattern;
+import pattern.model.Pattern;
 
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 
-import static properties.TextProperties.*;
+import static properties.TextProperties.SEPARATOR;
 
-public class ReaderService {
+public class RadarReaderService {
     private final PatternFactory patternFactory;
     private final DefaultFileReaderWrapper defaultFileReaderWrapper;
 
-    public ReaderService(PatternFactory patternFactory, DefaultFileReaderWrapper defaultFileReaderWrapper) {
+    public RadarReaderService(PatternFactory patternFactory, DefaultFileReaderWrapper defaultFileReaderWrapper) {
         this.patternFactory = patternFactory;
         this.defaultFileReaderWrapper = defaultFileReaderWrapper;
     }
 
-    public List<RadarPattern> readRadarFile() {
-        List<List<String>> linesList = readFromFile(RADARS_TXT);
-        List<RadarPattern> radarPatterns = new ArrayList<>();
+    public List<Pattern> readRadarFile(PatternEnum patternEnum) {
+        List<Pattern> patterns = new ArrayList<>();
+        List<List<String>> linesList = readFromFile(patternEnum.getPath());
+
         for (int i = 0; i < linesList.size(); i++) {
-            radarPatterns.add((RadarPattern) patternFactory.getPattern(
-                    PatternEnum.RADAR,
+            patterns.add(patternFactory.getPattern(
+                    patternEnum,
                     (long) i + 1,
-                    linesList.get(i)));
+                    linesList.get(i))
+            );
         }
 
-        return radarPatterns;
+        return patterns;
     }
 
-    public List<SpaceInvaderPattern> readSpaceInvaderFile() {
-        List<List<String>> linesList = readFromFile(SPACE_INVADERS_TXT);
-        List<SpaceInvaderPattern> spaceInvaderPatterns = new ArrayList<>();
-        for (int i = 0; i < linesList.size(); i++) {
-            spaceInvaderPatterns.add((SpaceInvaderPattern) patternFactory.getPattern(
-                    PatternEnum.SPACE_INVADER,
-                    (long) i + 1,
-                    linesList.get(i)));
-        }
-
-        return spaceInvaderPatterns;
-    }
-
-    public List<List<String>> readFromFile(String path) {
+    List<List<String>> readFromFile(String path) {
         List<List<String>> patternList = new ArrayList<>();
         try {
             List<String> allLines = defaultFileReaderWrapper.readAllLines(Paths.get(path));
@@ -64,6 +52,7 @@ public class ReaderService {
     private void enrichPatternList(List<String> allLines, List<List<String>> patternList) {
         List<String> pattern = new ArrayList<>();
         boolean lookingForFirstSeperator = true;
+
         for (String line : allLines) {
             if (lookingForFirstSeperator) {
                 if (SEPARATOR.equals(line)) {

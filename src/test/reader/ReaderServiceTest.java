@@ -17,14 +17,14 @@ import static properties.TextProperties.SEPARATOR;
 class ReaderServiceTest {
 
     private PatternFactory patternFactory;
-    private ReaderService readerService;
+    private RadarReaderService radarReaderService;
     private DefaultFileReaderWrapper defaultFileReaderWrapper;
 
     @BeforeEach
     void setUp() {
         patternFactory = mock(PatternFactory.class);
         defaultFileReaderWrapper = mock(DefaultFileReaderWrapper.class);
-        readerService = new ReaderService(patternFactory, defaultFileReaderWrapper);
+        radarReaderService = new RadarReaderService(patternFactory, defaultFileReaderWrapper);
     }
 
     @Test
@@ -36,7 +36,7 @@ class ReaderServiceTest {
         when(defaultFileReaderWrapper.readAllLines(Path.of("mockedFilePath"))).thenReturn(mockLines);
 
         // Test the method
-        List<List<String>> result = readerService.readFromFile("mockedFilePath");
+        List<List<String>> result = radarReaderService.readFromFile("mockedFilePath");
 
         // Assertions
         assertEquals(Collections.singletonList(expectedLines), result);
@@ -50,7 +50,7 @@ class ReaderServiceTest {
         when(defaultFileReaderWrapper.readAllLines(Path.of("mockedFilePath"))).thenReturn(mockLines);
 
         // Test the method
-        List<List<String>> result = readerService.readFromFile("mockedFilePath");
+        List<List<String>> result = radarReaderService.readFromFile("mockedFilePath");
 
         // Assertions
         assertEquals(List.of(), result);

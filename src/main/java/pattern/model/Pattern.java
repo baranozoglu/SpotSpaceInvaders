@@ -1,17 +1,15 @@
 package pattern.model;
 
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-
 import java.util.List;
 
-@NoArgsConstructor
-@AllArgsConstructor
 public abstract class Pattern {
     private Long id;
     private List<String> lines;
     private int verticalSize;
     private int horizontalSize;
+
+    protected Pattern() {
+    }
 
     protected Pattern(Long id, List<String> lines) {
         this.id = id;
